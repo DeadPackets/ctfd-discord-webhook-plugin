@@ -68,10 +68,12 @@ def load(app):
 
 					emoji = ''
 					if num_solves == 1:
+						fb_webhook = DiscordWebhook(url=app.config['DISCORD_WEBHOOK_URL'])
 						fb_embed = DiscordEmbed(title='FIRST BLOOD!', description=f'**{sanitize(user.name)}** just got first blood on the **{difficulty}** difficulty **{sanitize(challenge.category)}** challenge **{sanitize(challenge.name)}**!', color=color)
 						fb_embed.set_image(url='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/259/syringe_1f489.png')
 						fb_embed.set_timestamp()
-						webhook.add_embed(fb_embed)
+						fb_webhook.add_embed(fb_embed)
+						fb_webhook.execute()
 					elif num_solves == 2:
 						emoji = ' 🥈'
 					elif num_solves == 3:
