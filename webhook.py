@@ -49,7 +49,6 @@ def load(app):
 					limit = app.config["DISCORD_WEBHOOK_LIMIT"]
 					if limit and num_solves > int(limit):
 						return result
-					webhook = DiscordWebhook(url=app.config['DISCORD_WEBHOOK_URL'])
 
 					user = get_current_user()
 					difficulty = challenge.tags[0].value
@@ -68,24 +67,24 @@ def load(app):
 
 					emoji = ''
 					if num_solves == 1:
+						emoji = '🥇'
+					elif num_solves == 2:
+						emoji = '🥈'
+					elif num_solves == 3:
+						emoji = '🥉'
+					else:
+						emoji = '🚩'
+
+					if num_solves == 1:
 						fb_webhook = DiscordWebhook(url=app.config['DISCORD_WEBHOOK_URL'])
-						fb_embed = DiscordEmbed(title='FIRST BLOOD!', description=f'**{sanitize(user.name)}** just got first blood on the **{difficulty}** difficulty **{sanitize(challenge.category)}** challenge **{sanitize(challenge.name)}**!', color=color)
-						fb_embed.set_image(url='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/259/syringe_1f489.png')
-						fb_embed.set_timestamp()
+						fb_embed = DiscordEmbed(description=f'```md\n🩸 First blood on the [ {difficulty} ]( {challenge.category.replace("", "_")} ) challenge <{challenge.name.replace("", "_")}> goes to < {user.name.replace("", "_")} >```', color=color)
 						fb_webhook.add_embed(fb_embed)
 						fb_webhook.execute()
-					elif num_solves == 2:
-						emoji = ' 🥈'
-					elif num_solves == 3:
-						emoji = ' 🥉'
-					embed = DiscordEmbed(title='Flag Captured!', description=f'**{sanitize(user.name)}** captured a flag!', color=color)
-					embed.add_embed_field(name='User', value=sanitize(user.name))
-					embed.add_embed_field(name='Challenge', value=sanitize(challenge.name))
-					embed.add_embed_field(name='Category', value=sanitize(challenge.category))
-					embed.add_embed_field(name='Difficulty', value=difficulty)
-					embed.add_embed_field(name='Solves', value=f'{str(num_solves)}{emoji}')
-					webhook.add_embed(embed)
-					webhook.execute()
+					else:
+						webhook = DiscordWebhook(url=app.config['DISCORD_WEBHOOK_URL'])
+						embed = DiscordEmbed(description=f'```md\n{emoji} Flag captured from the [ {difficulty} ]( {challenge.category.replace("", "_")} ) challenge <{challenge.name.replace("", "_")}> by < {user.name.replace("", "_")} > -- ({num_solves} solves)```', color=color)
+						webhook.add_embed(embed)
+						webhook.execute()
 			return result
 		return wrapper
 
