@@ -82,6 +82,7 @@ def load(app):
 					embed.add_embed_field(name='Category', value=sanitize(challenge.category))
 					embed.add_embed_field(name='Difficulty', value=difficulty)
 					embed.add_embed_field(name='Solves', value=f'{str(num_solves)}{emoji}')
+					webhook.add_embed(embed)
 					webhook.execute()
 			return result
 		return wrapper
