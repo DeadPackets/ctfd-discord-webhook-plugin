@@ -77,12 +77,12 @@ def load(app):
 
 					if num_solves == 1:
 						fb_webhook = DiscordWebhook(url=app.config['DISCORD_WEBHOOK_URL'])
-						fb_embed = DiscordEmbed(description=f'```md\n🩸 First blood on the [ {difficulty} ]( {challenge.category.replace(" ", "_")} ) challenge <{challenge.name.replace("", "_")}> goes to < {user.name.replace("", "_")} >```', color=color)
+						fb_embed = DiscordEmbed(description=f'```md\n🩸 First blood on the [ {difficulty} ]( {challenge.category.replace(" ", "_")} ) challenge <{challenge.name.replace(" ", "_")}> goes to < {user.name.replace(" ", "_")} >```', color=color)
 						fb_webhook.add_embed(fb_embed)
 						fb_webhook.execute()
 					else:
 						webhook = DiscordWebhook(url=app.config['DISCORD_WEBHOOK_URL'])
-						embed = DiscordEmbed(description=f'```md\n{emoji} Flag captured from the [ {difficulty} ]( {challenge.category.replace(" ", "_")} ) challenge <{challenge.name.replace("", "_")}> by < {user.name.replace("", "_")} > -- ({num_solves} solves)```', color=color)
+						embed = DiscordEmbed(description=f'```md\n{emoji} Flag captured from the [ {difficulty} ]( {challenge.category.replace(" ", "_")} ) challenge <{challenge.name.replace(" ", "_")}> by < {user.name.replace(" ", "_")} > -- ({num_solves} solves)```', color=color)
 						webhook.add_embed(embed)
 						webhook.execute()
 			return result
