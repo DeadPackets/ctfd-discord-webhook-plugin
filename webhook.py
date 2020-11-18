@@ -53,17 +53,23 @@ def load(app):
 					user = get_current_user()
 					difficulty = challenge.tags[0].value
 					color = 0x0
+					img_url = ''
 
 					if (difficulty == 'Easy'):
 						color = 0x0EEC88
+						img_url = 'https://i.imgur.com/0dfOYmU.jpg'
 					elif (difficulty == 'Medium'):
 						color = 0xfb901e
+						img_url = 'https://i.imgur.com/FFSgd5o.jpg'
 					elif (difficulty == 'Hard'):
 						color = 0xff2856
+						img_url = 'https://i.imgur.com/7rz0Xsh.jpg'
 					elif (difficulty == 'Warmup'):
 						color = 0x00fff9
+						img_url = 'https://i.imgur.com/UYvi3wU.jpg'
 					else:
 						color = 0x00fff9
+						img_url = 'https://i.imgur.com/UYvi3wU.jpg'
 
 					emoji = ''
 					if num_solves == 1:
@@ -78,11 +84,14 @@ def load(app):
 					if num_solves == 1:
 						fb_webhook = DiscordWebhook(url=app.config['DISCORD_WEBHOOK_URL'])
 						fb_embed = DiscordEmbed(description=f'```md\n🩸 First blood on the [ {difficulty} ]( {challenge.category.replace(" ", "_")} ) challenge <{challenge.name.replace(" ", "_")}> goes to < {user.name.replace(" ", "_")} >```', color=color)
+						fb_embed.set_image(url=img_url)
+						fb_embed.set_timestamp()
 						fb_webhook.add_embed(fb_embed)
 						fb_webhook.execute()
 					else:
 						webhook = DiscordWebhook(url=app.config['DISCORD_WEBHOOK_URL'])
 						embed = DiscordEmbed(description=f'```md\n{emoji} Flag captured from the [ {difficulty} ]( {challenge.category.replace(" ", "_")} ) challenge <{challenge.name.replace(" ", "_")}> by < {user.name.replace(" ", "_")} > -- ({num_solves} solves)```', color=color)
+						embed.set_timestamp()
 						webhook.add_embed(embed)
 						webhook.execute()
 			return result
