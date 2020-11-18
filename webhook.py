@@ -88,7 +88,7 @@ def load(app):
 						embed.set_image(url=img_url)
 					else:
 						embed = DiscordEmbed(title='Flag Captured!', description=f'```md\n{emoji} Flag captured from the [ {difficulty} ]( {challenge.category.replace(" ", "_")} ) challenge <{challenge.name.replace(" ", "_")}> by < {user.name.replace(" ", "_")} > -- ({num_solves} solves)```', color=color)
-					webhook.set_timestamp()
+					embed.set_timestamp()
 					webhook.add_embed(embed)
 					webhook.execute()
 			return result
