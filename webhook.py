@@ -81,19 +81,16 @@ def load(app):
 					else:
 						emoji = '🚩'
 
+					webhook = DiscordWebhook(url=app.config['DISCORD_WEBHOOK_URL'])
+					embed = None
 					if num_solves == 1:
-						fb_webhook = DiscordWebhook(url=app.config['DISCORD_WEBHOOK_URL'])
-						fb_embed = DiscordEmbed(description=f'```md\n🩸 First blood on the [ {difficulty} ]( {challenge.category.replace(" ", "_")} ) challenge <{challenge.name.replace(" ", "_")}> goes to < {user.name.replace(" ", "_")} >```', color=color)
-						fb_embed.set_image(url=img_url)
-						fb_embed.set_timestamp()
-						fb_webhook.add_embed(fb_embed)
-						fb_webhook.execute()
+						embed = DiscordEmbed(title='First Blood!', description=f'```md\n🩸 First blood on the [ {difficulty} ]( {challenge.category.replace(" ", "_")} ) challenge <{challenge.name.replace(" ", "_")}> goes to < {user.name.replace(" ", "_")} >```', color=color)
+						embed.set_image(url=img_url)
 					else:
-						webhook = DiscordWebhook(url=app.config['DISCORD_WEBHOOK_URL'])
-						embed = DiscordEmbed(description=f'```md\n{emoji} Flag captured from the [ {difficulty} ]( {challenge.category.replace(" ", "_")} ) challenge <{challenge.name.replace(" ", "_")}> by < {user.name.replace(" ", "_")} > -- ({num_solves} solves)```', color=color)
-						embed.set_timestamp()
-						webhook.add_embed(embed)
-						webhook.execute()
+						embed = DiscordEmbed(title='Flag Captured!', description=f'```md\n{emoji} Flag captured from the [ {difficulty} ]( {challenge.category.replace(" ", "_")} ) challenge <{challenge.name.replace(" ", "_")}> by < {user.name.replace(" ", "_")} > -- ({num_solves} solves)```', color=color)
+					webhook.set_timestamp()
+					webhook.add_embed(embed)
+					webhook.execute()
 			return result
 		return wrapper
 
