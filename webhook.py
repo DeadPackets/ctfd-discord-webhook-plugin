@@ -67,6 +67,9 @@ def load(app):
 					elif (difficulty == 'Warmup'):
 						color = 0x00fff9
 						img_url = 'https://i.imgur.com/UYvi3wU.jpg'
+					elif (difficulty == 'Elite'):
+						color = 0x641EBD
+						img_url = 'https://i.imgur.com/9ile1tK.jpg'
 					else:
 						color = 0x00fff9
 						img_url = 'https://i.imgur.com/UYvi3wU.jpg'
