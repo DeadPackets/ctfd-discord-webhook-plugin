@@ -57,22 +57,19 @@ def load(app):
 
 					if (difficulty == 'Easy'):
 						color = 0x0EEC88
-						img_url = 'https://i.imgur.com/0dfOYmU.jpg'
+						img_url = 'https://i.imgur.com/tQ484OQ.jpg'
 					elif (difficulty == 'Medium'):
 						color = 0xfb901e
-						img_url = 'https://i.imgur.com/FFSgd5o.jpg'
+						img_url = 'https://i.imgur.com/Y8lN7GV.jpg'
 					elif (difficulty == 'Hard'):
 						color = 0xff2856
-						img_url = 'https://i.imgur.com/7rz0Xsh.jpg'
-					elif (difficulty == 'Warmup'):
-						color = 0x00fff9
-						img_url = 'https://i.imgur.com/UYvi3wU.jpg'
-					elif (difficulty == 'Elite'):
+						img_url = 'https://i.imgur.com/1btoscP.jpg'
+					elif (difficulty == 'Extreme'):
 						color = 0x641EBD
-						img_url = 'https://i.imgur.com/9ile1tK.jpg'
+						img_url = 'https://i.imgur.com/oSFvxxc.jpg'
 					else:
-						color = 0x00fff9
-						img_url = 'https://i.imgur.com/UYvi3wU.jpg'
+						color = 0x0EEC88
+						img_url = 'https://i.imgur.com/tQ484OQ.jpg'
 
 					emoji = ''
 					if num_solves == 1:
